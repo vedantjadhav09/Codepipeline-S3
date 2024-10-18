@@ -1,51 +1,142 @@
 
+/* Import a Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    color: #333;
+    overflow: hidden; /* Prevent scrolling */
 }
 
 .quiz-container {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     width: 90%;
     max-width: 600px;
     text-align: center;
+    animation: fadeIn 1s ease-in-out; /* Fade-in effect */
 }
 
 h1 {
     color: #333;
+    font-size: 2em;
+    margin-bottom: 10px;
+    animation: textPop 1s ease;
 }
 
-#question-container {
-    margin: 20px 0;
-}
-
+/* Button Styling */
 button {
     display: block;
     width: 100%;
-    margin: 5px 0;
-    padding: 10px;
+    margin: 10px 0;
+    padding: 15px;
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    font-size: 1em;
+    font-weight: 600;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #2e86c1;
+    transform: scale(1.05); /* Slightly increase size on hover */
 }
 
+#submit-quiz {
+    background-color: #2ecc71;
+}
+
+#submit-quiz:hover {
+    background-color: #27ae60;
+}
+
+/* Styling for the score section */
 #result {
-    font-size: 20px;
+    font-size: 1.5em;
     color: #2c3e50;
     margin-top: 20px;
+    font-weight: 600;
+    animation: pulse 0.5s ease-in-out; /* Pulse effect when updated */
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes textPop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Additional Styling */
+#question-title {
+    margin-top: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #2980b9;
+}
+
+/* Animated Background for Options */
+#options button {
+    background-image: linear-gradient(to right, #3498db, #74b9ff);
+    transition: background 0.3s, color 0.3s;
+}
+
+#options button:hover {
+    background-image: linear-gradient(to right, #2e86c1, #4a69bd);
+    color: #f5f5f5;
+}
+
+/* Custom Scrollbar */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
