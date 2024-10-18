@@ -288,30 +288,25 @@ function shuffle(array) {
 shuffle(questions);
 
 function showCompletionMessage() {
+  // Get the time elapsed from the timer
+  const finalTime = document.getElementById("time").innerText;
+  
+  // Hide the question and options
   document.getElementById("question-container").style.display = "none";
   document.getElementById("timer").style.display = "none";
+
+  // Show the completion message and restart button
   const quizContainer = document.querySelector(".quiz-container");
   quizContainer.innerHTML += `
       <div id="completion-message">
-          <h2>Congratulations! You have completed the game!</h2>
+          <h2>Congratulations! You have completed the game in ${finalTime}!</h2>
           <button onclick="restartGame()">Restart Game</button>
       </div>
   `;
 }
 
 function restartGame() {
-  score = 0;
-  currentQuestionIndex = 0;
-  secondsElapsed = 0;
-  timerStarted = false;
-  document.getElementById("score").innerText = `Score: ${score}`;
-  document.getElementById("time").innerText = "00:00";
-  const completionMessage = document.getElementById("completion-message");
-  if (completionMessage) completionMessage.remove();
-  document.getElementById("question-container").style.display = "block";
-  document.getElementById("timer").style.display = "block";
-  shuffle(questions);
-  showQuestion();
+  location.reload();
 }
 
 function showQuestion() {
