@@ -309,7 +309,7 @@ function showQuestion() {
 function selectAnswer(selectedOption, correctAnswer) {
     if (selectedOption === correctAnswer) {
         score++;
-        document.getElementById("score").innerText = `: ${score}`;
+        document.getElementById("score").innerText = ` ${score}`;
         currentQuestionIndex++;
     
         if (currentQuestionIndex < questions.length) {
