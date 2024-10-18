@@ -1,6 +1,6 @@
 let currentQuestionIndex = 0;
 let score = 0;
-let highScore = localStorage.getItem("highScore") || 0;
+let highScore = 0;
 
 const questions = [
   {
@@ -327,7 +327,7 @@ function selectAnswer(selectedOption, correctAnswer) {
 function checkHighScore() {
     if (score > highScore) {
         highScore = score;
-        localStorage.setItem("highScore", highScore);
+        // No localStorage usage needed
         document.getElementById("high-score").innerText = ` ${highScore}`;
         alert(`New High Score! Your score is ${score}.`);
     } else {
