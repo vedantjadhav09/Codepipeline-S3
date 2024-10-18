@@ -70,6 +70,16 @@ button:hover {
     animation: pulse 0.5s ease-in-out; /* Pulse effect when updated */
 }
 
+/* Timer Styling */
+#timer {
+    font-size: 1.5em; /* Match the score font size */
+    color: #2c3e50; /* Same color as score */
+    margin-top: 0px; /* Match the margin */
+    font-weight: 600; /* Same font weight */
+    animation: pulse 0.5s ease-in-out; /* Apply the same pulse effect */
+    text-align: center; /* Ensure it is centered */
+}
+
 /* Custom Animations */
 @keyframes fadeIn {
     from {
@@ -140,4 +150,3 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-
