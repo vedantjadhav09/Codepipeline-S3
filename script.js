@@ -1,6 +1,9 @@
 let currentQuestionIndex = 0;
 let score = 0;
 let highScore = 0;
+let timer; // Variable to hold the timer interval
+let secondsElapsed = 0; // Tracks the elapsed time
+let timerStarted = false; // Flag to check if the timer has started
 
 const questions = [
   {
@@ -228,11 +231,6 @@ const questions = [
     options: ["5", "6", "7", "8"],
     correctAnswer: "7"
 },
-{
-    question: "Who painted the ceiling of the Sistine Chapel?",
-    options: ["Leonardo da Vinci", "Raphael", "Michelangelo", "Donatello"],
-    correctAnswer: "Michelangelo"
-},
   {
     question: "Which planet is known as the Earth's twin?",
     options: ["Mars", "Venus", "Jupiter", "Saturn"],
@@ -289,6 +287,33 @@ function shuffle(array) {
 // Shuffle the questions before displaying
 shuffle(questions);
 
+function showCompletionMessage() {
+  document.getElementById("question-container").style.display = "none";
+  document.getElementById("timer").style.display = "none";
+  const quizContainer = document.querySelector(".quiz-container");
+  quizContainer.innerHTML += `
+      <div id="completion-message">
+          <h2>Congratulations! You have completed the game!</h2>
+          <button onclick="restartGame()">Restart Game</button>
+      </div>
+  `;
+}
+
+function restartGame() {
+  score = 0;
+  currentQuestionIndex = 0;
+  secondsElapsed = 0;
+  timerStarted = false;
+  document.getElementById("score").innerText = `Score: ${score}`;
+  document.getElementById("time").innerText = "00:00";
+  const completionMessage = document.getElementById("completion-message");
+  if (completionMessage) completionMessage.remove();
+  document.getElementById("question-container").style.display = "block";
+  document.getElementById("timer").style.display = "block";
+  shuffle(questions);
+  showQuestion();
+}
+
 function showQuestion() {
   const questionData = questions[currentQuestionIndex];
   document.getElementById("question-title").innerText = `Question ${
@@ -307,6 +332,12 @@ function showQuestion() {
 }
 
 function selectAnswer(selectedOption, correctAnswer) {
+    // Start the timer only if it hasn't started yet
+    if (!timerStarted) {
+        startTimer();
+        timerStarted = true;
+    }
+
     if (selectedOption === correctAnswer) {
         score++;
         document.getElementById("score").innerText = ` ${score}`;
@@ -315,8 +346,7 @@ function selectAnswer(selectedOption, correctAnswer) {
         if (currentQuestionIndex < questions.length) {
             showQuestion();
         } else {
-            checkHighScore();
-            resetGame();
+            showCompletionMessage();
         }
     } else {
         checkHighScore();
@@ -341,6 +371,22 @@ function resetGame() {
     shuffle(questions);
     document.getElementById("score").innerText = ` ${score}`;
     showQuestion();
+}
+
+function startTimer() {
+  timer = setInterval(() => {
+      secondsElapsed++;
+      document.getElementById("time").innerText = formatTime(secondsElapsed);
+  }, 1000); // Update every second
+}
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  // Pad with zeros if needed
+  const formattedMins = mins < 10 ? `0${mins}` : mins;
+  const formattedSecs = secs < 10 ? `0${secs}` : secs;
+  return `${formattedMins}:${formattedSecs}`;
 }
 
 // Initialize the first question
